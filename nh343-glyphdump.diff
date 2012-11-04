@@ -1,0 +1,90 @@
+diff -Nurd --exclude-from=diff_ignore_files.txt nethack-3.4.3-orig/include/extern.h nethack-3.4.3-tiledump/include/extern.h
+--- nethack-3.4.3-orig/include/extern.h	2006-08-08 23:07:19.000000000 +0300
++++ nethack-3.4.3-tiledump/include/extern.h	2007-03-24 18:31:26.000000000 +0200
+@@ -285,6 +285,7 @@
+ E int FDECL(zapdir_to_glyph, (int,int,int));
+ E int FDECL(glyph_at, (XCHAR_P,XCHAR_P));
+ E void NDECL(set_wall_state);
++E void FDECL(fdump_glyphs, (const char *));
+ 
+ /* ### do.c ### */
+ 
+diff -Nurd --exclude-from=diff_ignore_files.txt nethack-3.4.3-orig/src/cmd.c nethack-3.4.3-tiledump/src/cmd.c
+--- nethack-3.4.3-orig/src/cmd.c	2006-08-08 23:07:19.000000000 +0300
++++ nethack-3.4.3-tiledump/src/cmd.c	2007-03-24 18:41:51.000000000 +0200
+@@ -123,6 +123,7 @@
+ STATIC_PTR int NDECL(wiz_show_vision);
+ STATIC_PTR int NDECL(wiz_mon_polycontrol);
+ STATIC_PTR int NDECL(wiz_show_wmodes);
++STATIC_PTR int NDECL(wiz_fdump_glyphs);
+ #if defined(__BORLANDC__) && !defined(_WIN32)
+ extern void FDECL(show_borlandc_stats, (winid));
+ #endif
+@@ -645,6 +646,18 @@
+         return 0;
+ }
+ 
++static int dumpnum = 0;
++
++STATIC_PTR int
++wiz_fdump_glyphs()
++{
++    char buf[BUFSZ];
++
++    sprintf(buf, "glyph_dump_%li.txt", (long)u.ubirthday + (dumpnum++));
++    fdump_glyphs(buf);
++    return 0;
++}
++
+ /* #seenv command */
+ STATIC_PTR int
+ wiz_show_seenv()
+@@ -1520,6 +1533,7 @@
+ #endif
+ 	{(char *)0, (char *)0, donull, TRUE},
+         {(char *)0, (char *)0, donull, TRUE},
++        {(char *)0, (char *)0, donull, TRUE},
+ 	{(char *)0, (char *)0, donull, TRUE},
+ 	{(char *)0, (char *)0, donull, TRUE},
+ #ifdef DEBUG
+@@ -1545,6 +1559,7 @@
+ #endif
+ 	{"seenv", "show seen vectors", wiz_show_seenv, TRUE},
+ 	{"stats", "show memory statistics", wiz_show_stats, TRUE},
++	{"dump_glyphs", "dump map glyphs into file", wiz_fdump_glyphs, TRUE},
+ 	{"timeout", "look at timeout queue", wiz_timeout_queue, TRUE},
+ 	{"vision", "show vision array", wiz_show_vision, TRUE},
+ #ifdef DEBUG
+diff -Nurd --exclude-from=diff_ignore_files.txt nethack-3.4.3-orig/src/display.c nethack-3.4.3-tiledump/src/display.c
+--- nethack-3.4.3-orig/src/display.c	2006-08-08 23:07:19.000000000 +0300
++++ nethack-3.4.3-tiledump/src/display.c	2007-04-14 19:07:01.000000000 +0300
+@@ -2193,4 +2193,29 @@
+     return idx;
+ }
+ 
++extern short glyph2tile[];
++
++void
++fdump_glyphs(fname)
++const char *fname;
++{
++    FILE *fp;
++    int x, y;
++    int first;
++    struct trap *tmp;
++
++    fp = fopen(fname, "w");
++
++    for (y = 0; y < ROWNO; y++) {
++	first = 1;
++	for (x = 1; x < COLNO; x++) {
++	    fprintf(fp, "%s%i", (first ? "" : ","), glyph2tile[gbuf[y][x].glyph]);
++	    first = 0;
++	}
++	fprintf(fp, "\n");
++    }
++
++    fclose(fp);
++}
++
+ /*display.c*/
