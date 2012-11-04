@@ -2,10 +2,6 @@
 
 include "common.php";
 
-function issetval($i,$def=0) {
-  return (isset($i) ? $i : $def);
-}
-
 function printcss()
 {
   global $tiledata;
@@ -70,7 +66,11 @@ function cmptile($tilenum)
 
   while (list($key, $val) = each($tiledata)) {
 
-    $modd = issetval($val['datawid'],2);
+    if (!isset($val['datawid'])) $val['datawid'] = 2;
+    if (!isset($val['width'])) $val['width'] = 16;
+    if (!isset($val['height'])) $val['height'] = 16;
+
+    $modd = $val['datawid'];
 
     print '<tr>';
 
@@ -81,7 +81,7 @@ function cmptile($tilenum)
       print $val['name'];
     print '</td>';
 
-    print '<td style="padding:0.5em;width:'.issetval($val['width']).'px;height:'.issetval($val['height']).'px;">';
+    print '<td style="padding:0.5em;width:'.$val['width'].'px;height:'.$val['height'].'px;">';
     if ($val['istile']) {
       if (($val['width'] * floor($tilenum % $modd)) == 0) $xofs = 0;
       else $xofs = -(($val['width'] * floor($tilenum % $modd))-1);
@@ -93,7 +93,7 @@ function cmptile($tilenum)
       $col = strpos($hexchars, $val['data'][$tilenum]['color']);
       print '<pre><span class="f'.$col.'">'.$chr.'</span></pre>';
     }
-    $x += issetval($val['width']);
+    $x += $val['width'];
     $z++;
     print '</td>';
 
