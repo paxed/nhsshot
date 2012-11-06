@@ -84,7 +84,7 @@ function printmap($map, $tilenames=NULL, $tiles='tty')
 
   if (!$tiledata[$tiles]) return;
 
-  $modd = $tiledata[$tiles]['datawid'];
+  $modd = (isset($tiledata[$tiles]['datawid']) ? $tiledata[$tiles]['datawid'] : 0);
 
   $y = 0;
   $prevg = -1;
@@ -128,10 +128,10 @@ function printmap($map, $tilenames=NULL, $tiles='tty')
 	  }
 	}
       }
-      $x += $tiledata[$tiles]['width'];
+      $x += (isset($tiledata[$tiles]['width']) ? $tiledata[$tiles]['width'] : 16);
       $prevg = $g;
     }
-    $y += $tiledata[$tiles]['height'];
+    $y += (isset($tiledata[$tiles]['height']) ? $tiledata[$tiles]['height'] : 16);
     print "\n";
   }
   if (!$tiledata[$tiles]['istile']) { print '</span>'; }
@@ -149,6 +149,7 @@ function add_external_tileset($external_tilestr)
 				'data'=>$efname, 'datawid'=>$efdatawid, 'width'=>$efwidth, 'height'=>$efheight);
 }
 
+if (!isset($_GET['go'])) $_GET['go'] = 0;
 
 if (($_SERVER['REQUEST_METHOD'] == 'POST') || ($_GET['go'] == '1')) {
 
@@ -182,7 +183,7 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') || ($_GET['go'] == '1')) {
     array_push($map, $line);
   }
 
-  if ($_POST['tooltip'] == 'on') $tooltip = 1;
+  if (isset($_POST['tooltip']) && $_POST['tooltip'] == 'on') $tooltip = 1;
 
 } else {
   if (isset($_GET['dump']) && preg_match('/^-?[0-9]+$/', trim($_GET['dump']))) {
@@ -206,9 +207,11 @@ if (($_SERVER['REQUEST_METHOD'] == 'POST') || ($_GET['go'] == '1')) {
     $til = 'external';
   }
 
-  if (intval($_GET['tooltip']) > 0) $tooltip = 1;
+  if (isset($_GET['tooltip']) && (intval($_GET['tooltip']) > 0)) $tooltip = 1;
 }
 
+if (!isset($til)) $til = 'tty';
+if (!isset($dump)) $dump = 'glyph_dump_1176516037.txt';
 
 header('Content-type: text/html; charset=iso-8859-1');
 
