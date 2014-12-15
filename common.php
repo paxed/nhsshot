@@ -167,6 +167,13 @@ $tiledata = array(
 				   'data'=>'tileset/kins32-nh343.png',
 				   'datawid'=>40,
 				   'width'=>32, 'height'=>32),
+		  'dawn'=>array('name'=>'DawnHack tiles',
+				     'comment'=>'DawnBringer tiles by DragonDePlatino',
+				     'istile'=>1,
+				     'showmap'=>1,
+				     'data'=>'tileset/dawnhack.png',
+				     'datawid'=>40, # tiles per line in datafile
+				     'width'=>16, 'height'=>16),
 );
 
 
