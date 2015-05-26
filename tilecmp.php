@@ -145,7 +145,7 @@ for ($x = 0; $x < count($tilenames); $x++) {
   if ($x == $tile) {
     print ' selected';
   }
-  print '>'.$tilenames[$x].'</option>';
+  print '>'.$x.' '.$tilenames[$x].'</option>';
  }
 print '</select>';
 

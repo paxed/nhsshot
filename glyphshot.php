@@ -285,6 +285,10 @@ print '</form>'."\n";
 
 if (isset($map) && isset($til)) {
 
+  if ($tiledata[$til]['comment']) {
+    print '<p>Comment: <em>'.$tiledata[$til]['comment'].'</em>';
+  }
+
   if ($tiledata[$til]['istile']) {
     print '<p>tileset: <A href="'.$tiledata[$til]['data'].'">file</A>';
     print ', width: '.$tiledata[$til]['width'].', height: '.$tiledata[$til]['height'].', ';
