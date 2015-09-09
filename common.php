@@ -174,11 +174,11 @@ $tiledata = array(
 				     'data'=>'tileset/dawnhack.png',
 				     'datawid'=>40, # tiles per line in datafile
 				     'width'=>16, 'height'=>16),
-		  'thmodern'=>array('name'=>'Tower Hufman Modern, 32x32',
-				     'comment'=>'Modern tileset created by Tower Hufman using icons from game-icons.net',
+		  'thmodern'=>array('name'=>'Tower Hufham Modern, 32x32',
+				     'comment'=>'Modern tileset created by Tower Hufham using icons from game-icons.net',
 				     'istile'=>1,
 				     'showmap'=>1,
-				     'data'=>'tileset/tower_hufman_modern_32.png',
+				     'data'=>'tileset/tower_hufham_modern_32.png',
 				     'datawid'=>40, # tiles per line in datafile
 				     'width'=>32, 'height'=>32),
 );
