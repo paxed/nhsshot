@@ -175,11 +175,18 @@ $tiledata = array(
 				     'datawid'=>40, # tiles per line in datafile
 				     'width'=>16, 'height'=>16),
 		  'thmodern'=>array('name'=>'Tower Hufham Modern, 32x32',
-				     'comment'=>'Modern tileset created by Tower Hufham using icons from game-icons.net',
+				     'comment'=>'Modern tileset created by <a href="https://twitter.com/tower_hufham">Tower Hufham</a> using icons from game-icons.net',
 				     'istile'=>1,
 				     'showmap'=>1,
 				     'data'=>'tileset/tower_hufham_modern_32.png',
 				     'datawid'=>40, # tiles per line in datafile
+				     'width'=>32, 'height'=>32),
+		  'nevanda'=>array('name'=>'Nevanda, 32x32',
+				     'comment'=>'Tileset created by <a href="http://nevanda.deviantart.com/art/nethack-tiles-32x32px-416691316">Nevanda</a> using icons from multiple sources',
+				     'istile'=>1,
+				     'showmap'=>1,
+				     'data'=>'tileset/nevanda_nethack.png',
+				     'datawid'=>40,
 				     'width'=>32, 'height'=>32),
 );
 
