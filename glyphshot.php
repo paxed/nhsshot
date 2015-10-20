@@ -285,7 +285,7 @@ print '</form>'."\n";
 
 if (isset($map) && isset($til)) {
 
-  if ($tiledata[$til]['comment']) {
+  if (isset($tiledata[$til]['comment'])) {
     print '<p>Comment: <em>'.$tiledata[$til]['comment'].'</em>';
   }
 
