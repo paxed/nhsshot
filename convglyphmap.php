@@ -17,12 +17,12 @@ while (list($key, $val) = each($dumpfiles)) {
   $fh = fopen($key.'.dat', 'wb');
 
   $hei = count($arr);
-  $wid = count(split(',', $arr[0]));
+  $wid = count(explode(',', $arr[0]));
 
   $dat = pack("SS", $wid, $hei);
 
   foreach ($arr as $l) {
-    $glyphs = split(',', $l);
+    $glyphs = explode(',', $l);
     foreach ($glyphs as $g) {
       $dat .= pack("S", $g);
     }

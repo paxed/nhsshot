@@ -90,7 +90,7 @@ function printmap($map, $tilenames=NULL, $tiles='tty')
   $prevg = -1;
 
   foreach ($map as $l) {
-    $glyphs = split(',', $l);
+    $glyphs = explode(',', $l);
     $x = 0;
     foreach ($glyphs as $g) {
       $g = intval($g);
@@ -141,7 +141,7 @@ function printmap($map, $tilenames=NULL, $tiles='tty')
 function add_external_tileset($external_tilestr)
 {
   global $tiledata;
-  list($efname, $efwidth, $efheight, $efdatawid) = split("\|", $external_tilestr, 4);
+  list($efname, $efwidth, $efheight, $efdatawid) = explode("|", $external_tilestr, 4);
   if ($efdatawid < 0 || !isset($efdatawid)) $efdatawid = 40;
   if ($efwidth < 2) $efwidth = 16;
   if ($efheight < 2) $efheight = 16;
