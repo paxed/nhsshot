@@ -236,7 +236,7 @@ print '<table>'."\n";
 print '<tr>';
 print '<td>Tileset</td>';
 print '<td><select name="tileset">';
-while (list($key, $val) = each($tiledata)) {
+foreach ($tiledata as $key => $val) {
   if ($val['showmap']) {
     print '<option value="'.$key.'"';
     if ($key == $til) {
@@ -253,7 +253,8 @@ print '<td>Level</td>';
 print '<td><select name="dump">';
 $dumpcount = 0;
 $dumpnum = 0;
-while (list($key, $val) = each($dumpfiles)) {
+foreach ($dumpfiles as $key => $val) {
+  $val = $dumpfiles[$key];
   print '<option value="'.$key.'"';
   if ($key == $dump) {
     print ' selected';

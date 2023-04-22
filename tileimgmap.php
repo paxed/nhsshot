@@ -38,7 +38,7 @@ print '<form method="POST" action="'.phpself_querystr().'" name="f1">'."\n";
 
 print '<p>Tileset ';
 print '<select name="tileset">';
-while (list($key, $val) = each($tiledata)) {
+foreach ($tiledata as $key => $val) {
   if ($val['showmap'] && $val['istile']) {
     print '<option value="'.$key.'"';
     if ($key == $til) {

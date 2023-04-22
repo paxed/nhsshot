@@ -30,7 +30,7 @@ body { }
 
   $z = 0;
 
-  while (list($key, $val) = each($tiledata)) {
+  foreach ($tiledata as $key => $val) {
     if ($val['istile']) {
       print '
 .t'.$z.' {
@@ -64,7 +64,7 @@ function cmptile($tilenum)
 
   print '<table border="1">';
 
-  while (list($key, $val) = each($tiledata)) {
+  foreach ($tiledata as $key => $val) {
 
     if (!isset($val['datawid'])) $val['datawid'] = 2;
     if (!isset($val['width'])) $val['width'] = 16;
